@@ -42,6 +42,10 @@ const Navbar = () => {
   const alt = theme.palette.background.alt;
 
   const fullName = `${user.firstName} ${user.lastName}`;
+
+  const messageToggle = () => {
+    
+  }
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
@@ -57,7 +61,7 @@ const Navbar = () => {
             },
           }}
         >
-          Sociopedia
+          JustLink
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
@@ -84,7 +88,7 @@ const Navbar = () => {
               <LightMode sx={{ color: dark, fontSize: "25px" }} />
             )}
           </IconButton>
-          <Message sx={{ fontSize: "25px" }} />
+          <Message onClick={() => messageToggle()} sx={{ fontSize: "25px", cursor: "pointer" }} />
           <Notifications sx={{ fontSize: "25px" }} />
           <Help sx={{ fontSize: "25px" }} />
           <FormControl variant="standard" value={fullName}>

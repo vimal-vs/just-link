@@ -95,12 +95,22 @@ const Form = () => {
       );
       navigate("/home");
     }
+    if (loggedInResponse.status === 400){
+      window.alert("Sorry, unrecognized credentials.");
+    }
   };
 
   const handleFormSubmit = async (values, onSubmitProps) => {
     if (isLogin) await login(values, onSubmitProps);
     if (isRegister) await register(values, onSubmitProps);
   };
+
+  const demoUser = () => {
+    initialValuesLogin.email = "johndoe@business.com"
+    initialValuesLogin.password = "johndoe"
+    navigate("/home");
+  }
+
 
   return (
     <Formik
@@ -211,6 +221,7 @@ const Form = () => {
 
             <TextField
               label="Email"
+              id="email"
               onBlur={handleBlur}
               onChange={handleChange}
               value={values.email}
@@ -221,6 +232,7 @@ const Form = () => {
             />
             <TextField
               label="Password"
+              id="password"
               type="password"
               onBlur={handleBlur}
               onChange={handleChange}
@@ -249,6 +261,24 @@ const Form = () => {
               }}
             >
               {isLogin ? "LOGIN" : "REGISTER"}
+            </Button>
+            <Button
+              fullWidth
+              type="button"
+              id="demoUserBtn"
+              onClick={demoUser}
+              sx={{
+                m: "2rem 0",
+                p: "1rem",
+                backgroundColor: palette.primary.main,
+                color: palette.background.alt,
+                "&:hover": { 
+                  backgroundColor: palette.primary.main,
+                  color: palette.primary.alt 
+                },
+              }}
+            >
+              Demo User
             </Button>
             <Typography
               onClick={() => {
