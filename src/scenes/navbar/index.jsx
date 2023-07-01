@@ -26,6 +26,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
+import toast, { Toaster } from 'react-hot-toast';
+
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -44,8 +46,17 @@ const Navbar = () => {
   const fullName = `${user.firstName} ${user.lastName}`;
 
   const messageToggle = () => {
-    
+    toast.success('You have no new messages.');
   }
+
+  const notificationsToggle = () => {
+    toast.success('You have no pending notifications.');
+  }
+
+  const helpToggle = () => {
+    toast(`Hi ${fullName}👋, you are now in the home page.`);
+  }
+
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
@@ -56,12 +67,11 @@ const Navbar = () => {
           onClick={() => navigate("/home")}
           sx={{
             "&:hover": {
-              color: primaryLight,
               cursor: "pointer",
             },
           }}
         >
-          JustLink
+          SocioLink
         </Typography>
         {isNonMobileScreens && (
           <FlexBetween
@@ -89,8 +99,8 @@ const Navbar = () => {
             )}
           </IconButton>
           <Message onClick={() => messageToggle()} sx={{ fontSize: "25px", cursor: "pointer" }} />
-          <Notifications sx={{ fontSize: "25px" }} />
-          <Help sx={{ fontSize: "25px" }} />
+          <Notifications onClick={() => notificationsToggle()} sx={{ fontSize: "25px", cursor: "pointer" }}/>
+          <Help onClick={() => helpToggle()} sx={{ fontSize: "25px", cursor: "pointer" }} />
           <FormControl variant="standard" value={fullName}>
             <Select
               value={fullName}
@@ -195,6 +205,7 @@ const Navbar = () => {
           </FlexBetween>
         </Box>
       )}
+      <Toaster />
     </FlexBetween>
   );
 };

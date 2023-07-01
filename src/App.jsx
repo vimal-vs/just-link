@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { createTheme } from "@mui/material";
 import { themeSettings } from "theme";
-import './input.css'
+import './input.css';
 
 export default function App(){
   const mode = useSelector((state) => state.mode);
